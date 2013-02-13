@@ -3,6 +3,7 @@
 /* ========================================================================== */
 /*
 	samba.inc
+	mail - pszafer@gmail.com
 	part of pfSense (http://www.pfSense.com)
 	Copyright (C) 2011 - 2012 Alexander Wilke <nachtfalkeaw@web.de>
 	All rights reserved.
