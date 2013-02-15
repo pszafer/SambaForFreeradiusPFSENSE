@@ -297,8 +297,8 @@ function samba_settings_resync_service(){
 #
 samba_enable="YES"
 # You can disable/enable any of the Samba daemons by specifying:
-#nmbd_enable="NO"
-#smbd_enable="NO"
+nmbd_enable="NO"
+smbd_enable="NO"
 # You need to enable winbindd separately, by adding:
 winbindd_enable="YES"
 #
