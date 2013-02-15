@@ -1,6 +1,6 @@
 # SAMBA PACKAGE FOR FREERADIUS IN PFSENSE 2.1
 
-If You want to use Freeradius in PfSense 2.1 and log in users using Active Directory authentication this package is as far as I know necessary.
+If You want to use Freeradius in PfSense 2.1 and log in users using Active Directory authentication this package is as far as I know only way to do that.
 
 
 **LICENSE**
