@@ -4,15 +4,18 @@ If You want to use Freeradius in PfSense 2.1 and log in users using Active Direc
 
 
 **LICENSE**
+
 GNU GPL
 
 **REQUIRMENTS**
+
 PFSense 2.1 amd64
 At least 170 MB of free space.
 Other machine with Apache installed
 
 **INSTALLATION INSTRUCTION**
 **(valid until it is not part of pfSense packages repository)**
+
 By installing it user accepts that I'm not responsible for any damage, problems this software could make.
 
 1. First step is to download tbz folder into your pfsense box.
@@ -41,10 +44,8 @@ $ killall smbd nmbd winbindd
 </package>
 ```
 where your server hostname is Apache server IP or hostname.
-
 Paste samba directory into config and you need to edit samba.xml file!
-
-5. 
+5. e
  
 
 
