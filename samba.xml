@@ -78,17 +78,17 @@
 	<additional_files_needed>
 		<prefix>/usr/local/pkg/</prefix>
 		<chmod>0755</chmod>
-		<item>http://xps.poznan.tbhydro.net/packages/config/samba/samba.inc</item>
+		<item>http://${hostname}/packages/config/samba/samba.inc</item>
 	</additional_files_needed>
 	<additional_files_needed>
 		<prefix>/usr/local/pkg/</prefix>
 		<chmod>0755</chmod>
-		<item>http://xps.poznan.tbhydro.net/packages/config/samba/samba_credential.xml</item>
+		<item>http://${hostname}/packages/config/samba/samba_credential.xml</item>
 	</additional_files_needed>
 	<additional_files_needed>
 		<prefix>/usr/local/pkg/</prefix>
 		<chmod>0755</chmod>
-		<item>http://xps.poznan.tbhydro.net/packages/config/samba/libraries.sh</item>
+		<item>http://${hostname}/packages/config/samba/libraries.sh</item>
 	</additional_files_needed>
 	<fields>
 		<field>
