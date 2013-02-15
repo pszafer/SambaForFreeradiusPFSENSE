@@ -5,7 +5,7 @@ If You want to use Freeradius in PfSense 2.1 and log in users using Active Direc
 
 **LICENSE**
 
-GNU GPL
+>GNU GPL
 
 **REQUIRMENTS**
 
