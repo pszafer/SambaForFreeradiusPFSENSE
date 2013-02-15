@@ -10,10 +10,12 @@ GNU GPL
 **REQUIRMENTS**
 
 PFSense 2.1 amd64
+
 At least 170 MB of free space.
+
 Other machine with Apache installed
 
-#INSTALLATION INSTRUCTION
+##INSTALLATION INSTRUCTION
 **(valid until it is not part of pfSense packages repository)**
 
 By installing it user accepts that I'm not responsible for any damage, problems this software could make.
@@ -56,14 +58,21 @@ where your server hostname is Apache server IP or hostname.
 1. You need to complete LDAP tab's and EAP.
 
 In LDAP put your server settings like (insert normal user without special privileges):
+
 Server: server.company.org
+
 Identity: cn=addressbook,cn=Users,cn=company,cn=org
+
 Password: password
+
 BaseDN: could be empty, but I have something like: ou=Workers,cn=company,cn=org
+
 Filter: (SAMAccountName=%{mschap:User-Name})
+
 Base filter: (objectclass=radiusprofile)
 
 In EAP tab:
+
 Default EAP type: mschapv2,
 
 in seciton EAP-PEAP choose EAP-type: mschapv2
@@ -77,11 +86,15 @@ $ vi freeradius.inc
 Find line with ntlm_auth=/path/to/ntlm_auth ....
 
 Edit it as:
+
 ntlm_auth=/usr/local/bin/ntlm_auth ...
+
 Be aware that last option "nt-response" is in next line, so correct so all command will be in one line.
 
 **NOT TESTED**
+
 Please, remember that this method is not tested yet so create backups!
+
 You can also try to apply prepared patched for freeradius
 ```bash
 $ fetch http://pastebin.com/raw.php?i=CS8fupvz -o /root/freeradius.patch
@@ -96,9 +109,11 @@ If it is showing /usr/local/bin/ntlm_auth everything is correct. Otherwise, plea
 
 **Other info**
 In this configuration, in Windows you have to disable 'Verify server certificate'!
+
 I will prepare special instruction about working with certificates later.
 
-In Wireless configuration you have to choose in Advanced: Authorization using username, not computer.
+
+*In Wireless configuration you have to choose in Advanced: Authorization using username, not computer.
 
 **TROUBLESHOOTING**
 
@@ -138,4 +153,4 @@ Good luck!
 7. Disable autorun service after installation.
 8. Automatic install of tbz (if package won't be added to pfSense packages repository).
 
-To be continued...
+#To be continued...
