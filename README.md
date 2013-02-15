@@ -53,7 +53,7 @@ where your server hostname is Apache server IP or hostname.
 9. After installation completes, go to Services -> Samba. Complete fields in first tab, Settings and after that put credential tab, insert admin username and password, choose Join domain and click button.
 10. It's done.
 
-**Freeradius Configuration**
+*Freeradius Configuration*
 
 1. You need to complete LDAP tab's and EAP.
 
