@@ -55,7 +55,7 @@ where your server hostname is Apache server IP or hostname.
 
 ###Freeradius Configuration
 
-1. You need to complete LDAP tab's and EAP.
+* You need to complete LDAP tab's and EAP.
 
 In LDAP put your server settings like (insert normal user without special privileges):
 
@@ -77,7 +77,7 @@ Default EAP type: mschapv2,
 
 in seciton EAP-PEAP choose EAP-type: mschapv2
 
-2. GO to shell and do following:
+* GO to shell and do following:
 ```bash
 $ cd /usr/local/pkg/
 $ vi freeradius.inc
