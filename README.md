@@ -59,23 +59,17 @@ where your server hostname is Apache server IP or hostname.
 
 In LDAP put your server settings like (insert normal user without special privileges):
 
-Server: server.company.org
-
-Identity: cn=addressbook,cn=Users,cn=company,cn=org
-
-Password: password
-
-BaseDN: could be empty, but I have something like: ou=Workers,cn=company,cn=org
-
-Filter: (SAMAccountName=%{mschap:User-Name})
-
-Base filter: (objectclass=radiusprofile)
+>Server: server.company.org
+>Identity: cn=addressbook,cn=Users,cn=company,cn=org
+>Password: password
+>BaseDN: could be empty, but I have something like: ou=Workers,cn=company,cn=org
+>Filter: (SAMAccountName=%{mschap:User-Name})
+>Base filter: (objectclass=radiusprofile)
 
 In EAP tab:
 
-Default EAP type: mschapv2,
-
-in seciton EAP-PEAP choose EAP-type: mschapv2
+>Default EAP type: mschapv2,
+>in seciton EAP-PEAP choose EAP-type: mschapv2
 
 * GO to shell and do following:
 ```bash
