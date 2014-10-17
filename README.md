@@ -110,21 +110,8 @@ In EAP tab:
 
 >in seciton EAP-PEAP choose EAP-type: mschapv2
 
-* GO to shell and do following:
-```bash
-$ cd /usr/local/pkg/
-$ vi freeradius.inc
-```
-
-Find line with ntlm_auth=/path/to/ntlm_auth ....
-
-Edit it as:
-
-ntlm_auth=/usr/local/bin/ntlm_auth ...
-
-Be aware that last option "nt-response" is in next line, so correct so all command will be in one line.
-
-**NOT TESTED**
+##INSTALLATION INSTRUCTION for PFSENSE 2.1
+**VERSION 1**
 
 Please, remember that this method is not tested yet so create backups!
 
@@ -138,6 +125,20 @@ Now go to freeradius config, and click save anywhere. To check if patch applied 
 $ cat /usr/pbi/freeradius-amd64/etc/raddb/modules/mschap | grep "ntlm_auth = "
 ```
 If it is showing /usr/local/bin/ntlm_auth everything is correct. Otherwise, please report mi it.
+
+** VERSION 2 (needed to be applied every restart) - use it if version 2 is not working:**
+```bash
+$ cd /usr/local/pkg/
+$ vi freeradius.inc
+```
+
+Find line with ntlm_auth=/path/to/ntlm_auth ....
+
+Edit it as:
+
+ntlm_auth=/usr/local/bin/ntlm_auth ...
+
+***Be aware that last option "nt-response" is in next line, so correct so all command will be in one line.***
 
 
 **Other info**
@@ -176,14 +177,9 @@ Analyze radiusd -X output if Access-reject of radtest. In radtest passwords cann
 Good luck!
  
 # TODO LIST
-
+***Maybe I will do it someday, but since almost nobody is interested in that, I won't work on it.
 1. remove unnecessary Samba files, leave only that files, necessary to run winbindd.
 2. Apply patch to freeradius in samba.inc or to Freeradius developer.
-3. Do better instructions to configure everything.
-4. Create full uninstallation procedure.
-5. Work on certificates authorization (instructions)
-6. Work on computer authorization (instructions)
-7. Disable autorun service after installation.
-8. Automatic install of tbz (if package won't be added to pfSense packages repository).
+3. Create full uninstallation procedure.
 
-#To be continued...
+#Good luck!
