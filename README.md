@@ -177,7 +177,7 @@ Analyze radiusd -X output if Access-reject of radtest. In radtest passwords cann
 Good luck!
  
 # TODO LIST
-***Maybe I will do it someday, but since almost nobody is interested in that, I won't work on it.
+***Maybe I will do it someday, but since almost nobody is interested in that, I won't work on it.***
 1. remove unnecessary Samba files, leave only that files, necessary to run winbindd.
 2. Apply patch to freeradius in samba.inc or to Freeradius developer.
 3. Create full uninstallation procedure.
