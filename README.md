@@ -1,6 +1,6 @@
-# SAMBA PACKAGE FOR FREERADIUS IN PFSENSE 2.1
+# SAMBA PACKAGE FOR FREERADIUS IN PFSENSE 2.1 and 2.2 beta
 
-If You want to use Freeradius in PfSense 2.1 and log in users using Active Directory authentication this package is as far as I know only way to do that.
+If You want to use Freeradius in PfSense 2.1/2.2 and log in users using Active Directory authentication this package is as far as I know only way to do that.
 
 
 **LICENSE**
@@ -9,13 +9,13 @@ If You want to use Freeradius in PfSense 2.1 and log in users using Active Direc
 
 **REQUIRMENTS**
 
-PFSense 2.1 amd64
+PFSense 2.1 amd64 or PFSense 2.2
 
 At least 170 MB of free space.
 
 Other machine with Apache installed
 
-##INSTALLATION INSTRUCTION
+##INSTALLATION INSTRUCTION for PFSENSE 2.1
 **(valid until it is not part of pfSense packages repository)**
 
 By installing it user accepts that I'm not responsible for any damage, problems this software could make.
@@ -26,7 +26,6 @@ By installing it user accepts that I'm not responsible for any damage, problems 
 $ pkg_add samba36-3.6.12.tbz
 $ killall smbd nmbd winbindd
 ```
-
 3. Now create your own package repository (tutorial - http://doc.pfsense.org/index.php/Creating_Your_Own_Package_Repository)
 4. Add below code to your pkg_config.8.xml.amd64 file in packages section:
 ```xml
@@ -53,6 +52,39 @@ where your server hostname is Apache server IP or hostname.
 9. After installation completes, go to Services -> Samba. Complete fields in first tab, Settings and after that put credential tab, insert admin username and password, choose Join domain and click button.
 10. It's done.
 
+##INSTALLATION INSTRUCTION for PFSENSE 2.2
+1. Install samba by new FreeBSD package manager executing:
+```bash
+$ pkg install samba41-4.1.11
+$ killall smbd nmbd winbindd
+```
+2. Now create your own package repository (tutorial -http://doc.pfsense.org/index.php/Creating_Your_Own_Package_Repository). Follow this tutorial, but put everything in root directory since in pfSense 2.2 developers changed dir where pfSense 2.2 is looking for xmlrpc.php.
+3. In repo create packages directory and pull it from github. You need also to edit xmlrpc.php file in line 124 to don't look for packages directory above -> $path_to_files = './packages/';
+4. Add below code to your pkg_config.10.xml file in packages section:
+```xml
+<package>
+		<name>Samba</name>
+		<pkginfolink>http://forum.pfsense.org/</pkginfolink>
+		<descr><![CDATA[Samba package to use with freeradius]]></descr>
+		<depends_on_package_base_url>http://${yourserverhostname}/packages/config/samba/</depends_on_package_base_url>
+		<depends_on_package>samba36-3.6.12.tbz</depends_on_package>
+		<category>Services</category>
+		<version>0.1.1</version>
+		<status>Alpha</status>
+		<required_version>2.0</required_version>
+		<config_file>http://${yourserverhostname}/packages/config/samba/samba.xml</config_file>
+		<maintainer>pszafer@gmail.com</maintainer>
+		<configurationfile>samba.xml</configurationfile>
+</package>
+```
+where your server hostname is Apache server IP or hostname.
+5. Paste samba package into config folder
+6. Now it's time to edit samba.xml. Change value ${hostname} with hostname or ip address of Apache server.
+7. If you haven't done it already, go to your pfSense webGUI and go to: http(s)://yourpfSenseIP/pkg_mgr_settings.php. Change base url to your repository server hostname/IP address.
+8. Go to available packages and install Samba.
+9. After installation completes, go to Services -> Samba. Complete fields in first tab, Settings and after that put credential tab, insert admin username and password, choose Join domain and click button.
+10. It's done.
+
 ###Freeradius Configuration
 
 * You need to complete LDAP tab's and EAP.
@@ -61,7 +93,7 @@ In LDAP put your server settings like (insert normal user without special privil
 
 >Server: server.company.org
 
->Identity: cn=addressbook,cn=Users,cn=company,cn=org
+>Identity: cn=addressbook,cn=Users,cn=company,cn=org (this username I've created in Win Server AD)
 
 >Password: password
 
