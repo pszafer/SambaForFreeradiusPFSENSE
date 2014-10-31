@@ -55,7 +55,7 @@ where your server hostname is Apache server IP or hostname.
 ##INSTALLATION INSTRUCTION for PFSENSE 2.2
 1. Install samba by new FreeBSD package manager executing:
 ```bash
-$ pkg install samba41-4.1.11
+$ pkg install samba41
 $ killall smbd nmbd winbindd
 ```
 2. Now create your own package repository (tutorial -http://doc.pfsense.org/index.php/Creating_Your_Own_Package_Repository). Follow this tutorial, but put everything in root directory since in pfSense 2.2 developers changed dir where pfSense 2.2 is looking for xmlrpc.php.
