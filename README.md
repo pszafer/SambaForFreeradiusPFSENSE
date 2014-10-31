@@ -100,6 +100,8 @@ In LDAP put your server settings like (insert normal user without special privil
 >BaseDN: could be empty, but I have something like: ou=Workers,cn=company,cn=org
 
 >Filter: (SAMAccountName=%{mschap:User-Name})
+or
+>Filter: (&(objectClass=user)(sAMAccountName=%{%{Stripped-User-Name}:-%{User-Name}}*))
 
 >Base filter: (objectclass=radiusprofile)
 
@@ -110,8 +112,9 @@ In EAP tab:
 
 >in seciton EAP-PEAP choose EAP-type: mschapv2
 
-##INSTALLATION INSTRUCTION for PFSENSE 2.1
+##INSTALLATION INSTRUCTION for PFSENSE 2.1 / 2.2
 **VERSION 1**
+***THIS WON'T WORK YET FOR PFSENSE 2.2***
 
 Please, remember that this method is not tested yet so create backups!
 
@@ -126,7 +129,7 @@ $ cat /usr/pbi/freeradius-amd64/etc/raddb/modules/mschap | grep "ntlm_auth = "
 ```
 If it is showing /usr/local/bin/ntlm_auth everything is correct. Otherwise, please report mi it.
 
-** VERSION 2 (needed to be applied every restart) - use it if version 2 is not working:**
+** VERSION 2 (needed to be restart machine after that or even reinstall of freeradius) - use it if version 1 is not working:**
 ```bash
 $ cd /usr/local/pkg/
 $ vi freeradius.inc
@@ -138,6 +141,26 @@ Edit it as:
 
 ntlm_auth=/usr/local/bin/ntlm_auth ...
 
+****FOR PFSENSE 2.2****
+In my config I needed to made more changes in these line:
+VERSION 1
+```bash
+$ cp /usr/local/bin/ntlm_auth /usr/pbi/freeradius-amd64/bin/ntlm_auth
+$ vi freeradius.inc
+$ line 65 : ntlm_auth = "/usr/pbi/freeradius-amd64/bin/ntlm_auth --request-nt-key --username=%{%{mschap:User-Name}:-00} --challenge=%{%{mschap:Challenge}:-00} --nt-response=%{%{mschap:NT-Response}:-00}"
+```
+
+- Needed to copy ntlm_auth to freeradius directory since it won't execute ntlm_auth from proper path (don't know why yet). Permissions are correct.
+- Changed username extract options since with old full username it won't apply ntdomain (it send username without backslashes) 
+
+VERSION 2
+```bash
+$ echo "#!/bin/sh" > /usr/pbi/freeradius-amd64/bin/ntlm_auth
+$ echo "/usr/local/bin/ntlm_auth $@" >> /usr/pbi/freeradius-amd64/bin/ntlm_auth
+$ vi freeradius.inc
+$ line 65 : ntlm_auth = "/usr/pbi/freeradius-amd64/bin/ntlm_auth --request-nt-key
+--username=%{%{mschap:User-Name}:-00} --challenge=%{%{mschap:Challenge}:-00} --nt-response=%{%{mschap:NT-Response}:-00}"
+```
 ***Be aware that last option "nt-response" is in next line, so correct so all command will be in one line.***
 
 
@@ -178,7 +201,7 @@ Good luck!
  
 # TODO LIST
 ***Maybe I will do it someday, but since almost nobody is interested in that, I won't work on it.***
-1. remove unnecessary Samba files, leave only that files, necessary to run winbindd.
+1. remove unnecessary Samba files, leave only that files, necessary to run winbindd. #CANNOT BE DONE
 2. Apply patch to freeradius in samba.inc or to Freeradius developer.
 3. Create full uninstallation procedure.
 
